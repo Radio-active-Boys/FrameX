@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: framex-web
+    env: docker
+    plan: free
+    region: oregon
+    repo: https://github.com/your-username/framex
+    branch: main
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: NODE_ENV
+        value: production
+      - key: SECRET_KEY
+        value: your-secret-value-here
