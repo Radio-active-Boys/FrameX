@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="300" viewBox="0 0 800 300">
+  <defs>
+    <!-- Arrowhead -->
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="4" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#E74C3C"/>
+    </marker>
+
+    <!-- Gradient for Logo Text -->
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4A00E0"/>
+      <stop offset="100%" stop-color="#8E2DE2"/>
+    </linearGradient>
+
+    <!-- Beam Gradient -->
+    <linearGradient id="beamGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2C3E50"/>
+      <stop offset="100%" stop-color="#34495E"/>
+    </linearGradient>
+  </defs>
+
+  <style>
+    .beam {
+      stroke: url(#beamGradient);
+      stroke-width: 10;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .joint {
+      fill: #00BCD4;
+    }
+    .strong-x {
+      stroke: #F39C12;
+      stroke-width: 8;
+      fill: none;
+      stroke-linecap: square;
+    }
+    .text {
+      font: bold 64px 'Segoe UI', sans-serif;
+      fill: url(#textGradient);
+    }
+    .arrow {
+      stroke: #E74C3C;
+      stroke-width: 2;
+      fill: none;
+      marker-end: url(#arrowhead);
+    }
+    .support-line {
+      stroke: #95A5A6;
+      stroke-width: 2;
+      fill: none;
+    }
+  </style>
+
+  <!-- Frame Geometry -->
+  <g transform="translate(120, 180)">
+    <!-- Columns -->
+    <line class="beam" x1="0" y1="0" x2="0" y2="-100"/>
+    <line class="beam" x1="120" y1="0" x2="120" y2="-100"/>
+    <!-- Beam -->
+    <line class="beam" x1="0" y1="-100" x2="120" y2="-100"/>
+    
+    <!-- Joints -->
+    <circle class="joint" cx="0" cy="0" r="6"/>
+    <circle class="joint" cx="120" cy="0" r="6"/>
+    <circle class="joint" cx="0" cy="-100" r="6"/>
+    <circle class="joint" cx="120" cy="-100" r="6"/>
+    
+    <!-- Internal X -->
+    <line class="strong-x" x1="40" y1="-20" x2="80" y2="-80"/>
+    <line class="strong-x" x1="80" y1="-20" x2="40" y2="-80"/>
+    <line class="strong-x" x1="60" y1="-20" x2="60" y2="-80"/>
+    <line class="strong-x" x1="40" y1="-50" x2="80" y2="-50"/>
+    
+    <!-- Fixed Support Left -->
+    <polygon class="support-line" points="-10,10 10,10 0,0"/>
+    <line class="support-line" x1="-12" y1="13" x2="12" y2="13"/>
+    <line class="support-line" x1="-10" y1="16" x2="10" y2="16"/>
+    
+    <!-- Pinned Support Right -->
+    <polygon class="support-line" points="110,10 130,10 120,0"/>
+    
+    <!-- Load Arrow -->
+    <line class="arrow" x1="120" y1="-100" x2="160" y2="-100"/>
+  </g>
+
+  <!-- Colorful Logo Text -->
+  <text x="330" y="185" class="text">Frame𝕏</text>
+</svg>

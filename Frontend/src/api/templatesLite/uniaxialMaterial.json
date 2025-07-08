@@ -1,0 +1,15 @@
+[
+  {
+    "category": "uniaxialMaterial",
+    "name": "Elastic",
+    "tag":"truss",
+    "defaultParams": {
+      "Material ID": 1,
+      "Elasticity": 200000000000
+    },
+    "command": {
+      "name": "uniaxialMaterial",
+      "args": [ "Elastic","$Material ID", "$Elasticity"]
+    }
+  } 
+]

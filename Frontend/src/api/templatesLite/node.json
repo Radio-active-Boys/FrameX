@@ -1,0 +1,15 @@
+[{
+"category": "node",
+  "name": "Node",
+  "tag":"",
+  "defaultParams": {
+    "Node ID": 1,
+    "X Coordinate (m)": 0,
+    "Y Coordinate (m)": 0
+  },
+  "command": {
+    "name": "node",
+    "args": ["$Node ID", "$X Coordinate (m)", "$Y Coordinate (m)"]
+  }
+}
+]

@@ -1,0 +1,70 @@
+import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import mainLogo from './assets/mainLogo.svg';
+import { useUserTypeStore } from './utils/storeUserType';
+import JsonTogglePanel from './components/common/Panel';
+import DisclaimerModal from './components/common/DisclaimerModal';
+import './Navbar.css';
+
+export default function Navbar() {
+  const { status, setStatus } = useUserTypeStore();
+  const [showDisclaimer, setShowDisclaimer] = useState(false);
+
+  const handleAdvancedClick = () => {
+    if (status !== 'advanced') {
+      setShowDisclaimer(true);
+    }
+  };
+
+  const confirmSwitch = () => {
+    setStatus('advanced');
+    setShowDisclaimer(false);
+  };
+
+  const cancelSwitch = () => {
+    setShowDisclaimer(false);
+  };
+
+  return (
+    <>
+      <header className="navbar">
+        <div className="navbar-container">
+          <div className="nav-links">
+            <NavLink to="/model" className="nav-link">Model Builder</NavLink>
+            <NavLink to="/" className="nav-link">Analysis</NavLink>
+            <NavLink to="/recorder" className="nav-link">Results</NavLink>
+          </div>
+
+          <div className="navbar-logo">
+            <img src={mainLogo} alt="FrameX Logo" />
+          </div>
+
+          <div className="navbar-right">
+            <JsonTogglePanel />
+            <div className="mode-toggle">
+              <button
+                className={`mode-option ${status === 'lite' ? 'active' : ''}`}
+                onClick={() => setStatus('lite')}
+              >
+                Lite
+              </button>
+              <button
+                className={`mode-option ${status === 'advanced' ? 'active' : ''}`}
+                onClick={handleAdvancedClick}
+              >
+                Advanced Lite
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {showDisclaimer && (
+        <DisclaimerModal
+          onConfirm={confirmSwitch}
+          onCancel={cancelSwitch}
+        />
+      )}
+    </>
+  );
+}

@@ -1,0 +1,36 @@
+[
+  {
+    "name": "BasicBuilder Frame",
+    "category": "model",
+    "tag":"frame",
+    "defaultParams": {
+      "ndm": 2,
+      "ndf": 3
+    },
+    "command": {
+      "name": "model",
+      "args": [
+        "basic",     
+        "-ndm", "$ndm",
+        "-ndf", "$ndf"
+      ]
+    }
+  },
+  {
+    "name": "BasicBuilder Truss",
+    "category": "model",
+    "tag":"truss",
+    "defaultParams": {
+      "ndm": 2,
+      "ndf": 2
+    },
+    "command": {
+      "name": "model",
+      "args": [
+        "basic",
+        "-ndm", "$ndm",
+        "-ndf", "$ndf"
+      ]
+    }
+  }
+]

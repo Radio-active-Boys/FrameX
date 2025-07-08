@@ -1,0 +1,92 @@
+[
+  {
+    "category": "section",
+    "name": "Elastic2D",
+    "defaultParams": {
+      "secTag": 1,
+      "E": 200000000000,
+      "A": 0.01,
+      "Iz": 8.33e-6,
+      "G": null,
+      "alphaY": null
+    },
+    "command": {
+      "name": "section",
+      "args": ["Elastic", "$secTag", "$E", "$A", "$Iz", "$G", "$alphaY"]
+    }
+  },
+  {
+    "category": "section",
+    "name": "Elastic3D",
+    "defaultParams": {
+      "secTag": 2,
+      "E": 200000000000,
+      "A": 0.01,
+      "Iz": 8.33e-6,
+      "Iy": 6.66e-6,
+      "G": 76900000000,
+      "Jxx": 1e-6,
+      "alphaY": null,
+      "alphaZ": null
+    },
+    "command": {
+      "name": "section",
+      "args": ["Elastic", "$secTag", "$E", "$A", "$Iz", "$Iy", "$G", "$Jxx", "$alphaY", "$alphaZ"]
+    }
+  },
+  {
+    "category": "section",
+    "name": "FiberSectionGJ",
+    "defaultParams": {
+      "secTag": 3,
+      "GJ": 1e6
+    },
+    "command": {
+      "name": "section",
+      "args": ["Fiber", "$secTag", "-GJ", "$GJ"]
+    }
+  },
+  {
+    "category": "section",
+    "name": "FiberSectionTorsionMat",
+    "defaultParams": {
+      "secTag": 4,
+      "torsionMatTag": 1
+    },
+    "command": {
+      "name": "section",
+      "args": ["Fiber", "$secTag", "-torsion", "$torsionMatTag"]
+    }
+  },
+  {
+    "category": "section",
+    "name": "WFSection2d",
+    "defaultParams": {
+      "secTag": 5,
+      "matTag": 1,
+      "d": 0.3,
+      "tw": 0.01,
+      "bf": 0.15,
+      "tf": 0.02,
+      "Nfw": 10,
+      "Nff": 5
+    },
+    "command": {
+      "name": "section",
+      "args": ["WFSection2d", "$secTag", "$matTag", "$d", "$tw", "$bf", "$tf", "$Nfw", "$Nff"]
+    }
+  },
+  {
+    "category": "section",
+    "name": "UniaxialSection",
+    "defaultParams": {
+      "secTag": 6,
+      "matTag": 1,
+      "quantity": "Mz"
+    },
+    "command": {
+      "name": "section",
+      "args": ["Uniaxial", "$secTag", "$matTag", "$quantity"]
+    }
+  }
+]

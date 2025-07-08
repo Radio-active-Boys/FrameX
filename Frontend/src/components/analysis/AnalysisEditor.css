@@ -1,0 +1,156 @@
+.param-editor {
+  background-color: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  max-width: 760px;
+  /* margin: 10px auto; */
+  font-family: 'Segoe UI', sans-serif;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+
+  /* NEW: height and scroll styling */
+  height: 50vh; /* or 100%, or any height you need */
+  overflow-y: auto;
+}
+
+
+.param-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.param-header select {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+
+}
+
+.params {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
+.param-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.param-row label {
+  flex: 1;
+  font-weight: 500;
+}
+
+.param-row input {
+  flex: 2;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.array-input {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.array-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.array-row input {
+  padding: 8px;
+  flex: 1;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.remove-btn,
+.add-btn,
+.submit-btn {
+  padding: 8px 16px;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.remove-btn {
+  background-color: #d9534f;
+  color: white;
+}
+
+.remove-btn:hover {
+  background-color: #c9302c;
+}
+
+.add-btn {
+  align-self: flex-start;
+  background-color: #5cb85c;
+  color: white;
+}
+
+.add-btn:hover {
+  background-color: #4cae4c;
+}
+
+.submit-btn {
+  width: 100%;
+  background-color: #005bbb;
+  color: white;
+  font-size: 16px;
+}
+
+.submit-btn:hover {
+  background-color: #004a9f;
+}
+
+.sequence-section {
+  margin-top: 32px;
+}
+
+.sequence-section h3 {
+  margin-bottom: 12px;
+}
+
+.sequence-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.sequence-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px 12px;
+  background-color: #f5f7fa;
+  border-radius: 6px;
+}
+
+.button-group button {
+  margin-left: 6px;
+  background-color: #e2e6ea;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.button-group button:hover {
+  background-color: #cfd4da;
+}
+
+.empty-note {
+  color: #777;
+}
