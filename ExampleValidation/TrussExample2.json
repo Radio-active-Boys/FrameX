@@ -1,0 +1,705 @@
+{
+  "model_config": {
+    "ndm": 2,
+    "ndf": 2
+  },
+  "nodes": [
+    {
+      "command": "node",
+      "args": [
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "command": "node",
+      "args": [
+        2,
+        3,
+        0
+      ]
+    },
+    {
+      "command": "node",
+      "args": [
+        3,
+        6,
+        0
+      ]
+    },
+    {
+      "command": "node",
+      "args": [
+        4,
+        9,
+        0
+      ]
+    },
+    {
+      "command": "node",
+      "args": [
+        5,
+        12,
+        0
+      ]
+    },
+    {
+      "command": "node",
+      "args": [
+        6,
+        3,
+        3
+      ]
+    },
+    {
+      "command": "node",
+      "args": [
+        7,
+        6,
+        4.5
+      ]
+    },
+    {
+      "command": "node",
+      "args": [
+        8,
+        9,
+        3
+      ]
+    }
+  ],
+  "boundary_conditions": [
+    {
+      "command": "fix",
+      "args": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "command": "fix",
+      "args": [
+        5,
+        0,
+        1
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "command": "uniaxialMaterial",
+      "name": "Elastic",
+      "args": [
+        "Elastic",
+        1,
+        200000000000
+      ]
+    }
+  ],
+  "sections": [],
+  "transformations": [],
+  "integrations": [],
+  "elements": [
+    {
+      "command": "element",
+      "name": "Truss",
+      "args": [
+        "Truss",
+        1,
+        1,
+        2,
+        0.001,
+        1,
+        "-rho",
+        0,
+        "-cMass",
+        0,
+        "-doRayleigh",
+        0
+      ]
+    },
+    {
+      "command": "element",
+      "name": "Truss",
+      "args": [
+        "Truss",
+        2,
+        2,
+        3,
+        0.001,
+        1,
+        "-rho",
+        0,
+        "-cMass",
+        0,
+        "-doRayleigh",
+        0
+      ]
+    },
+    {
+      "command": "element",
+      "name": "Truss",
+      "args": [
+        "Truss",
+        3,
+        3,
+        4,
+        0.001,
+        1,
+        "-rho",
+        0,
+        "-cMass",
+        0,
+        "-doRayleigh",
+        0
+      ]
+    },
+    {
+      "command": "element",
+      "name": "Truss",
+      "args": [
+        "Truss",
+        4,
+        4,
+        5,
+        0.001,
+        1,
+        "-rho",
+        0,
+        "-cMass",
+        0,
+        "-doRayleigh",
+        0
+      ]
+    },
+    {
+      "command": "element",
+      "name": "Truss",
+      "args": [
+        "Truss",
+        5,
+        1,
+        6,
+        0.001,
+        1,
+        "-rho",
+        0,
+        "-cMass",
+        0,
+        "-doRayleigh",
+        0
+      ]
+    },
+    {
+      "command": "element",
+      "name": "Truss",
+      "args": [
+        "Truss",
+        6,
+        6,
+        7,
+        0.001,
+        1,
+        "-rho",
+        0,
+        "-cMass",
+        0,
+        "-doRayleigh",
+        0
+      ]
+    },
+    {
+      "command": "element",
+      "name": "Truss",
+      "args": [
+        "Truss",
+        7,
+        2,
+        6,
+        0.001,
+        1,
+        "-rho",
+        0,
+        "-cMass",
+        0,
+        "-doRayleigh",
+        0
+      ]
+    },
+    {
+      "command": "element",
+      "name": "Truss",
+      "args": [
+        "Truss",
+        8,
+        2,
+        7,
+        0.001,
+        1,
+        "-rho",
+        0,
+        "-cMass",
+        0,
+        "-doRayleigh",
+        0
+      ]
+    },
+    {
+      "command": "element",
+      "name": "Truss",
+      "args": [
+        "Truss",
+        9,
+        3,
+        7,
+        0.001,
+        1,
+        "-rho",
+        0,
+        "-cMass",
+        0,
+        "-doRayleigh",
+        0
+      ]
+    },
+    {
+      "command": "element",
+      "name": "Truss",
+      "args": [
+        "Truss",
+        10,
+        4,
+        7,
+        0.001,
+        1,
+        "-rho",
+        0,
+        "-cMass",
+        0,
+        "-doRayleigh",
+        0
+      ]
+    },
+    {
+      "command": "element",
+      "name": "Truss",
+      "args": [
+        "Truss",
+        11,
+        5,
+        8,
+        0.001,
+        1,
+        "-rho",
+        0,
+        "-cMass",
+        0,
+        "-doRayleigh",
+        0
+      ]
+    },
+    {
+      "command": "element",
+      "name": "Truss",
+      "args": [
+        "Truss",
+        12,
+        8,
+        7,
+        0.001,
+        1,
+        "-rho",
+        0,
+        "-cMass",
+        0,
+        "-doRayleigh",
+        0
+      ]
+    },
+    {
+      "command": "element",
+      "name": "Truss",
+      "args": [
+        "Truss",
+        13,
+        4,
+        8,
+        0.001,
+        1,
+        "-rho",
+        0,
+        "-cMass",
+        0,
+        "-doRayleigh",
+        0
+      ]
+    }
+  ],
+  "patterns": [
+    {
+      "command": "pattern",
+      "name": "Plain",
+      "args": [
+        "Plain",
+        1,
+        1,
+        "-fact",
+        1
+      ],
+      "loads": [
+        {
+          "command": "load",
+          "args": [
+            2,
+            0,
+            -6
+          ]
+        },
+        {
+          "command": "load",
+          "args": [
+            3,
+            0,
+            -8
+          ]
+        },
+        {
+          "command": "load",
+          "args": [
+            4,
+            0,
+            -2
+          ]
+        }
+      ]
+    }
+  ],
+  "time_series": [
+    {
+      "command": "timeSeries",
+      "name": "Constant",
+      "args": [
+        "Constant",
+        1,
+        "-factor",
+        1
+      ]
+    }
+  ],
+  "analysis_sequence": [
+    {
+      "command": "constraints",
+      "args": [
+        "Transformation"
+      ]
+    },
+    {
+      "command": "numberer",
+      "args": [
+        "RCM"
+      ]
+    },
+    {
+      "command": "system",
+      "args": [
+        "BandGeneral"
+      ]
+    },
+    {
+      "command": "algorithm",
+      "args": [
+        "Linear"
+      ]
+    },
+    {
+      "command": "integrator",
+      "args": [
+        "LoadControl",
+        1
+      ]
+    },
+    {
+      "command": "analysis",
+      "args": [
+        "Static"
+      ]
+    },
+    {
+      "command": "analyze",
+      "args": [
+        100
+      ]
+    }
+  ],
+  "recorders": [
+    {
+      "command": "recorder",
+      "name": "Node",
+      "args": [
+        "Node",
+        "-file",
+        "node_disp.txt",
+        "-time",
+        "-node",
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        "-dof",
+        1,
+        2,
+        "disp"
+      ]
+    },
+    {
+      "command": "recorder",
+      "name": "Node",
+      "args": [
+        "Node",
+        "-file",
+        "node_reaction.txt",
+        "-time",
+        "-node",
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        "-dof",
+        1,
+        2,
+        "reaction"
+      ]
+    },
+    {
+      "command": "recorder",
+      "name": "Node",
+      "args": [
+        "Node",
+        "-file",
+        "node_vel.txt",
+        "-time",
+        "-node",
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        "-dof",
+        1,
+        2,
+        "vel"
+      ]
+    },
+    {
+      "command": "recorder",
+      "name": "Node",
+      "args": [
+        "Node",
+        "-file",
+        "node_accel.txt",
+        "-time",
+        "-node",
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        "-dof",
+        1,
+        2,
+        "accel"
+      ]
+    },
+    {
+      "command": "recorder",
+      "name": "Element",
+      "args": [
+        "Element",
+        "-file",
+        "elem_force_global.txt",
+        "-time",
+        "-ele",
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        "force"
+      ]
+    },
+    {
+      "command": "recorder",
+      "name": "Element",
+      "args": [
+        "Element",
+        "-file",
+        "elem_localForce.txt",
+        "-time",
+        "-ele",
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        "localForce"
+      ]
+    },
+    {
+      "command": "recorder",
+      "name": "Element",
+      "args": [
+        "Element",
+        "-file",
+        "elem_deformation.txt",
+        "-time",
+        "-ele",
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        "deformation"
+      ]
+    },
+    {
+      "command": "recorder",
+      "name": "Element",
+      "args": [
+        "Element",
+        "-file",
+        "elem_axialForce.txt",
+        "-time",
+        "-ele",
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        "axialForce"
+      ]
+    },
+    {
+      "command": "recorder",
+      "name": "Element",
+      "args": [
+        "Element",
+        "-file",
+        "elem_basicDeformation.txt",
+        "-time",
+        "-ele",
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        "basicDeformation"
+      ]
+    },
+    {
+      "command": "recorder",
+      "name": "Element",
+      "args": [
+        "Element",
+        "-file",
+        "elem_basicForce.txt",
+        "-time",
+        "-ele",
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        "basicForce"
+      ]
+    },
+    {
+      "command": "recorder",
+      "name": "Element",
+      "args": [
+        "Element",
+        "-file",
+        "elem_stiffness.txt",
+        "-time",
+        "-ele",
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        "stiffness"
+      ]
+    }
+  ]
+}
