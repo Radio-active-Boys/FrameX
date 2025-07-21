@@ -2,8 +2,8 @@
 import axios from 'axios';
 
 // Everything under /api will be proxied by Nginx
-// const API_URL = '/api'; // Production
-const API_URL = 'http://127.0.0.1:5000'; // Deveopment
+const API_URL = '/api'; // Production
+// const API_URL = 'http://127.0.0.1:5000'; // Deveopment
 
 export const runAnalysis = async (modelData) => {
   // console.log("Data send to backend", modelData);
