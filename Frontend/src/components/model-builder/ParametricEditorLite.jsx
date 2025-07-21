@@ -81,17 +81,18 @@ const ParametricEditorLite = ({ category }) => {
     }
     
     addComponent(category, selected.name, parsed, patternId);
-    if (category !== nodeLite && category !== elementLite && category !== boundaryConditionsLite) {
-      alert(`✅ Added successfully!`);
+    if (category === 'uniaxialMaterialLite') {
+      alert(`✅ Material Added successfully!`);
     }
+    
     setRawParams(convertToRawParams(selected.defaultParams));
   };
 
   if (category === 'modelLite') {
     return (
-      <div className="param-editor">
+      <div className="model-param-editor">
         <h3>Structure Configuration</h3>
-        <div className="button-group">
+        <div className="model-button-group">
           {['truss', 'frame'].map(type => {
             const isActive = modelType === type;
             const label = type === 'truss' ? 'Truss' : 'Frame / Beam-Column';

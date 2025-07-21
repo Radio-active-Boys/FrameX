@@ -4,27 +4,12 @@ import { generateCommand, getTemplateByName } from '../api/jsonTemplates';
 import { generateId } from '../utils/idGenerator';
 import { useUserTypeStore } from '../utils/storeUserType';
 
-// Helper to extract the OpenSeES tag from args
 // Helper to extract an OpenSees tag from a command’s args
 const getOpenseesTag = (category, args) => {
   if (['node', 'nodeLite'].includes(category))     return args[0];
   if (['element', 'elementLite'].includes(category)) return args[1];
   return null;
 };
-
-// Given a category and a candidate tag, check across the store
-const isTagUnique = (state, category, tag) => {
-  // decide which array we’re checking
-  let arrName = null;
-  if (['node','nodeLite'].includes(category))       arrName = 'node';
-  else if (['element','elementLite'].includes(category)) arrName = 'element';
-  else return true; // only enforce on node/element
-
-  return !state[arrName].some(item =>
-    getOpenseesTag(category, item.args) === tag
-  );
-};
-
 
 export const useModelStore = create((set, get) => ({
   
@@ -210,10 +195,7 @@ addComponent: (category, templateName, params, parentId = null) => {
   set(state => ({ [arrKey]: [...(state[arrKey]||[]), item] }));
 },
 
-// ────────────────────────────────────────────────────────────────────────────
-// 2) updateComponentArgs with the same uniqueness guard
 updateComponentArgs: (category, id, newArgs) => {
-  // Only nodes (args[0]) and elements (args[1]) need checking
   let arrName, tagArgIndex;
   if (category === 'node') {
     arrName = 'node'; tagArgIndex = 0;
@@ -235,7 +217,6 @@ updateComponentArgs: (category, id, newArgs) => {
     }
   }
 
-  // Delegate to your existing updateComponentArgs logic:
   const arrMap = {
     node: 'node',
     boundaryConditions: 'boundaryConditions',
@@ -254,9 +235,7 @@ updateComponentArgs: (category, id, newArgs) => {
     )
   }));
 },
-// ────────────────────────────────────────────────────────────────────────────
 
-  // unified removeComponent
   removeComponent: (category, id) => {
     // section
     if (category === 'section' || category === 'sectionLite') {
@@ -319,9 +298,6 @@ updateComponentArgs: (category, id, newArgs) => {
 updateComponentArgs: (category, id, newArgs) => {
   const state = get();
 
-  //
-  // ── 1) DUPLICATE‑TAG GUARD FOR NODE/ELEMENT ────────────────────────────────
-  //
   let arrName, tagArgIndex;
   if (category === 'node') {
     arrName      = 'node';
@@ -332,7 +308,6 @@ updateComponentArgs: (category, id, newArgs) => {
   }
 
   if (arrName) {
-    // collect all tags except the one being edited
     const existingTags = state[arrName]
       .filter(item => item.id !== id)
       .map(item => item.args[tagArgIndex]);
@@ -340,7 +315,6 @@ updateComponentArgs: (category, id, newArgs) => {
     const newTag = newArgs[tagArgIndex];
 
     if (existingTags.includes(newTag)) {
-      // you can swap this for console.warn if you prefer
       window.alert(
         `Cannot rename ${arrName} to tag "${newTag}" — that tag is already in use.`
       );
@@ -348,11 +322,6 @@ updateComponentArgs: (category, id, newArgs) => {
     }
   }
 
-  //
-  // ── 2) YOUR ORIGINAL UPDATE LOGIC ───────────────────────────────────────────
-  //
-
-  // SECTION
   if (category === 'section') {
     set(s => ({
       section: s.section.map(sec =>
@@ -362,7 +331,6 @@ updateComponentArgs: (category, id, newArgs) => {
     return;
   }
 
-  // PATTERNS
   if (category === 'patterns') {
     set(s => ({
       patterns: s.patterns.map(p =>
@@ -372,7 +340,6 @@ updateComponentArgs: (category, id, newArgs) => {
     return;
   }
 
-  // LOADS (load / eleLoad / sp)
   if (category === 'loads') {
     set(s => ({
       loads: s.loads.map(l =>
@@ -382,7 +349,6 @@ updateComponentArgs: (category, id, newArgs) => {
     return;
   }
 
-  // GENERIC ARRAYS
   const arrMap = {
     node: 'node',
     boundaryConditions: 'boundaryConditions',

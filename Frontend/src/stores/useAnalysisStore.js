@@ -3,7 +3,7 @@ import { create } from 'zustand';
 import { generateCommand, getTemplateByName } from '../api/jsonTemplates';
 import { generateId } from '../utils/idGenerator';
 import { useUserTypeStore } from '../utils/storeUserType';
-// Helper: build args array for a recorder given its metadata
+
 function buildRecorderArgs({ name, fileName, nodeIds = [], dofs = [], eleIds = [], responseType }) {
   const args = [name,'-file', fileName, '-time', name === 'Element' ? '-ele' : '-node'];
   if (name === 'Node') {
@@ -75,7 +75,7 @@ initializeDefaultRecorders: ({ nodeIds = [], dofs = [1, 2], eleIds = [] }) => {
       category: item.command === 'analyze' ? 'analyze' : 'analysis'
     }));
   } else {
-    update.sequence = []; // ❗ Clear for advance user
+    update.sequence = []; 
   }
 
   set(() => update);
@@ -145,7 +145,6 @@ initializeDefaultRecorders: ({ nodeIds = [], dofs = [1, 2], eleIds = [] }) => {
     const id = generateId();
 
     if (category === 'analyze') {
-      // CHANGED: handle 'analyze' specially
       const steps = (params && params.steps) || 1;
       const item = {
         id,
@@ -157,7 +156,6 @@ initializeDefaultRecorders: ({ nodeIds = [], dofs = [1, 2], eleIds = [] }) => {
       return;
     }
 
-    // For other categories, use generateCommand if template-based
     const template = getTemplateByName(category, templateName);
     if (!template) return;
     const cmdObj = generateCommand(template, params);
