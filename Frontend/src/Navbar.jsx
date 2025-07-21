@@ -36,7 +36,9 @@ export default function Navbar() {
           </div>
 
           <div className="navbar-logo">
-            <img src={mainLogo} alt="FrameX Logo" />
+            <a href="https://www.linkedin.com/in/vishal-kashyap-5b8947256/" target="_blank" rel="noopener noreferrer">
+              <img src={mainLogo} alt="FrameX Logo" />
+            </a>
           </div>
 
           <div className="navbar-right">
