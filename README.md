@@ -6,7 +6,7 @@
 
 FrameX is a browser-based application for modeling, visualizing, and analyzing 2D structural frames and trusses. Built on React (Vite), Flask, and OpenSeesPy, FrameX offers real-time finite element analysis, animated deformations, and detailed force diagrams—all within an intuitive, JSON-driven interface.
 
-🔗 **Live ** [https://framex.onrender.com](https://framex.onrender.com)
+🔗 **Live**  [https://framex.onrender.com](https://framex.onrender.com)
 
 ---
 
