@@ -52,7 +52,7 @@ export default function Navbar() {
                 className={`mode-option ${status === 'advanced' ? 'active' : ''}`}
                 onClick={handleAdvancedClick}
               >
-                Advanced Lite
+                Advanced
               </button>
             </div>
           </div>

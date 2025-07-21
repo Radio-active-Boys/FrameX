@@ -372,6 +372,19 @@ function DrawElementsDeflected(g, elements, coords, dispMap, xScale, yScale, sfa
   const beamTypes = ['elasticBeamColumn', 'dispBeamColumn', 'forceBeamColumn'];
 
   elements.forEach(el => {
+      if (el.type === "zeroLength") {
+        const p1 = coords[el.i];
+        if (!p1) return;
+        g.append("circle")
+          .attr("cx", xScale(p1.x))
+          .attr("cy", yScale(p1.y))
+          .attr("r", 6)
+          .attr("fill", "none")
+          .attr("stroke", "purple")
+          .attr("stroke-width", 2)
+          .attr("stroke-dasharray", "3,2");
+        return; // skip remaining logic for this element
+      }
     const p1 = coords[el.i], p2 = coords[el.j];
     if (!p1 || !p2) return;
 
@@ -385,7 +398,6 @@ function DrawElementsDeflected(g, elements, coords, dispMap, xScale, yScale, sfa
     const uy1 = dispMap[nodeI]?.["2"] || 0;
     const ux2 = dispMap[nodeJ]?.["1"] || 0;
     const uy2 = dispMap[nodeJ]?.["2"] || 0;
-console.log("el type",el.type)
     // Handle truss elements
     if (trussTypes.includes(el.type)) {
       const x1d = p1.x + ux1 * sfac;

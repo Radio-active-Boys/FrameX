@@ -102,11 +102,13 @@ export default function PatternEditorLite() {
     if (!newTpl) return;
     addComponent('pattern', newTpl, newParams);
     setNewParams(templates.find(t => t.name === newTpl).defaultParams);
+    alert('✅ Pattern added successfully! Now go to Select Pattern');
   };
 
   const handleRemovePattern = () => {
     if (selectedPattern) removeComponent('pattern', selectedPattern.id);
     setSelPatId('');
+    alert('✅ Pattern Removed successfully!');
   };
 
   return (

@@ -79,7 +79,11 @@ const ParametricEditorLite = ({ category }) => {
       alert('One or more parameter values are invalid.');
       return;
     }
+    
     addComponent(category, selected.name, parsed, patternId);
+    if (category !== nodeLite && category !== elementLite && category !== boundaryConditionsLite) {
+      alert(`✅ Added successfully!`);
+    }
     setRawParams(convertToRawParams(selected.defaultParams));
   };
 

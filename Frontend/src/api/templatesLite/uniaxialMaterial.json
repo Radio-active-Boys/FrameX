@@ -11,5 +11,18 @@
       "name": "uniaxialMaterial",
       "args": [ "Elastic","$Material ID", "$Elasticity"]
     }
+  },
+  {
+    "category": "uniaxialMaterial",
+    "name": "Elastic",
+    "tag":"hinge",
+    "defaultParams": {
+      "Material ID": 10001,
+      "Elasticity": 200000000000
+    },
+    "command": {
+      "name": "uniaxialMaterial",
+      "args": [ "Elastic","$Material ID", "$Elasticity"]
+    }
   } 
 ]

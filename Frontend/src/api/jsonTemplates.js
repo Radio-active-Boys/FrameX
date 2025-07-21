@@ -182,7 +182,7 @@ export const generateCommand = (template, params) => {
       if (negate ? !truthy : truthy) {
         return argSpec.value.flatMap(resolveArg);
       }
-      return [];
+      return []; 
     }
 
     return [];

@@ -54,5 +54,26 @@
         "-release", 0
       ]
     }
+  },
+    {
+    "category": "element",
+    "name": "zeroLength",
+     "tag":"hinge",
+    "defaultParams": {
+      "eleTag": 10001,
+      "eleNodes": [10001, 2],
+      "matTags": [10001, 10002],
+      "dirs": [1, 2, 3]
+    },
+    "command": {
+      "name": "element",
+      "args": [
+        "zeroLength",
+        "$eleTag",
+        "*$eleNodes",
+        "-mat", "*$matTags",
+        "-dir", "*$dirs"
+      ]
+    }
   }
 ]

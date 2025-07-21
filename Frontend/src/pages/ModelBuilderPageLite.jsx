@@ -4,6 +4,7 @@ import ParametricEditorLite from '../components/model-builder/ParametricEditorLi
 import PatternEditorLite from '../components/model-builder/PatternEditorLite';
 import SectionEditor from '../components/model-builder/SectionEditor';
 import ModelViewer from '../components/visualization/ModelViewer';
+import Hinge from '../components/model-builder/Hinge';
 import { useUserTypeStore } from '../utils/storeUserType';
 import { useModelStore } from '../stores/useModelStore';
 import './ModelBuilderPage.css';
@@ -12,7 +13,8 @@ const ModelBuilderPageLite = () => {
   const [modelJson, setModelJson] = useState(useModelStore.getState().toJson());
   const initializeDefaults = useModelStore(s => s.initializeDefaults);
   const status = useUserTypeStore(s => s.status);
-
+  const modelConfig = useModelStore(state => state.modelConfig);
+  const modelType = modelConfig.ndf === 3 ? 'frame' : 'truss';
   useEffect(() => {
     initializeDefaults();
   }, [status, initializeDefaults]);
@@ -48,6 +50,8 @@ const ModelBuilderPageLite = () => {
         return <ParametricEditorLite category="beamIntegrationLite" />;
       case 'transformations':
         return <ParametricEditorLite category="geomTransfLite" />;
+      case 'hinge':
+        return <Hinge />;
       default:
         return null;
     }
@@ -61,13 +65,15 @@ const ModelBuilderPageLite = () => {
             'model',
             'nodes',
             'supports',
-            'materials',
+            
+            ...(modelType === 'truss' ? ['materials'] : []),
             // 'sections',
             // 'transformations',
             // 'integrations',
             'elements',
             // 'timeSeries',
-            'pattern'
+            'pattern',
+            ...(modelType === 'frame' ? ['hinge'] : []),
           ].map(tab => (
             <button
               key={tab}

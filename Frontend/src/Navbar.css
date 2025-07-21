@@ -8,11 +8,9 @@
   backdrop-filter: blur(12px);
   border-radius: 32px;
   border-bottom: 1px solid rgba(9, 7, 7, 0.203);
-  height: auto;
+  height: 8vh;
   overflow: visible;
 }
-
-
 
 /* Enable flex wrap and spacing */
 .navbar-container {
@@ -83,7 +81,7 @@
   align-items: center;
   gap: 8px;
   flex-wrap: wrap;
-  justify-content: flex-end;
+  justify-content: center;
   flex: 1;
   min-width: 0;
 }
@@ -156,4 +154,10 @@
   .mode-toggle {
     width: 100%;
   }
+}
+
+.navbar-logo,
+.nav-links,
+.navbar-right {
+  margin-top: -10px; /* fine-tune upward movement */
 }

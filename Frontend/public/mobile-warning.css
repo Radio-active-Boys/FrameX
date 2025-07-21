@@ -17,7 +17,7 @@
 }
 
 
-@media (max-width: 1000px) {
+@media (max-width: 830px) {
   .mobile-warning {
     display: flex;
   }

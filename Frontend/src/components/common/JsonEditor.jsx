@@ -164,7 +164,7 @@ export default function JsonEditor() {
                   return (
                     <div key={item.id} className="command-card">
                       <div><strong>Command:</strong> {item.command}</div>
-                      <div><strong>ID:</strong>      {item.id}</div>
+                      {/* <div><strong>ID:</strong>      {item.id}</div> */}
                       <div>
                         <strong>Args:</strong>
                         {item.args.map((arg, i) => (
