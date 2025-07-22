@@ -1,11 +1,11 @@
 // src/components/analysis/AnalysisConfig.jsx
-import { useState } from 'react';
-import { useAnalysisStore } from '../../stores/useAnalysisStore';
-import { useModelStore } from '../../stores/useModelStore';
-import { useResultStore } from '../../stores/useResultStore';
-import { runAnalysis,cleanupOutput } from '../../api/openseesService';
-import { importModel } from '../../utils/modelUtils';
-import './AnalysisConfig.css';
+import { useState } from "react";
+import { useAnalysisStore } from "../../stores/useAnalysisStore";
+import { useModelStore } from "../../stores/useModelStore";
+import { useResultStore } from "../../stores/useResultStore";
+import { runAnalysis, cleanupOutput } from "../../api/openseesService";
+import { importModel } from "../../utils/modelUtils";
+import "./AnalysisConfig.css";
 
 const AnalysisConfig = () => {
   const [results, setResults] = useState(null);
@@ -14,7 +14,7 @@ const AnalysisConfig = () => {
 
   const [importedJson, setImportedJson] = useState(null);
   const [importError, setImportError] = useState(null);
-  const [importFileName, setImportFileName] = useState('');
+  const [importFileName, setImportFileName] = useState("");
   const [inputKey, setInputKey] = useState(0);
 
   const setResultData = useResultStore((state) => state.setResultData);
@@ -23,13 +23,14 @@ const AnalysisConfig = () => {
   const handleFileChange = (e) => {
     setImportError(null);
     setImportedJson(null);
-    setImportFileName('');
-
+    setImportFileName("");
+    setError(null);
+    setResults(null);
     const file = e.target.files[0];
     if (!file) return;
 
-    if (!file.name.toLowerCase().endsWith('.json')) {
-      setImportError('Please select a .json file');
+    if (!file.name.toLowerCase().endsWith('.framex')) {
+      setImportError('Please select .framex file');
       return;
     }
     setImportFileName(file.name);
@@ -39,116 +40,128 @@ const AnalysisConfig = () => {
       try {
         const text = event.target.result;
         const parsed = JSON.parse(text);
+        if (!parsed.meta || parsed.meta.format !== "framex") {
+          throw new Error(
+            "This file does not appear to be a valid FrameX model."
+          );
+        }
         setImportedJson(parsed);
       } catch (err) {
-        console.error('JSON parse error:', err);
-        setImportError('Invalid JSON file: ' + err.message);
+        console.error("FRAMEX parse error:", err);
+        setImportError( err.message);
       }
     };
     reader.onerror = (err) => {
-      console.error('File read error:', err);
-      setImportError('Failed to read file');
+      console.error("File read error:", err);
+      setImportError("Failed to read file");
     };
     reader.readAsText(file);
   };
 
-const handleRunAnalysis = async () => {
-  setIsLoading(true);
-  setError(null);
-  setResults(null);
-  clearResults();
+  const handleRunAnalysis = async () => {
+    setIsLoading(true);
+    setError(null);
+    setResults(null);
+    clearResults();
 
-  let fullPayload;
-  if (importedJson) {
-    fullPayload = importedJson;
-    importModel(fullPayload);
-  } else {
-    const modelJson = useModelStore.getState().toJson();
-    const analysisJson = useAnalysisStore.getState().toJson();
-    fullPayload = { ...modelJson, ...analysisJson };
-  }
-
-  if (!fullPayload.nodes || fullPayload.nodes.length === 0) {
-    setError("You must define at least one node before running analysis.");
-    setIsLoading(false);
-    return;
-  }
-
-  try {
-    const response = await runAnalysis(fullPayload);
-
-    if (response.status === "success") {
-      setResults(response);
-      setResultData(response);
-
-      // ✅ Automatically run cleanup in the background
-      if (response.output_dir) {
-        cleanupOutput(response.output_dir).catch((err) => {
-          console.warn("Cleanup failed:", err);
-        });
-      }
-
+    let fullPayload;
+    if (importedJson) {
+      fullPayload = importedJson;
+      importModel(fullPayload);
     } else {
-      let msg = "Analysis failed. Please verify loading and boundary conditions.";
+      const modelJson = useModelStore.getState().toJson();
+      const analysisJson = useAnalysisStore.getState().toJson();
+      fullPayload = { ...modelJson, ...analysisJson };
+    }
 
-      if (Array.isArray(response.errors) && response.errors.length > 0) {
-        const errorMsgs = response.errors.map(e => {
-          if (typeof e === "string") return e;
+    if (!fullPayload.nodes || fullPayload.nodes.length === 0) {
+      handleClearImport();
+      setError("You must define at least one node before running analysis.");
+      setIsLoading(false);
+      return;
+    }
 
-          // Safely construct a detailed error message
-          const command = e.command || "unknown";
-          const args = Array.isArray(e.args) ? e.args.join(", ") : e.args || "none";
-          const errorText = e.error || "";
+    try {
+      const response = await runAnalysis(fullPayload);
 
-          return `Model build failed due to "${command}" command with args [${args}]`;
+      if (response.status === "success") {
+        setResults(response);
+        setResultData(response);
+        handleClearImport();
+
+        // ✅ Automatically run cleanup in the background
+        if (response.output_dir) {
+          cleanupOutput(response.output_dir).catch((err) => {
+            console.warn("Cleanup failed:", err);
+          });
+        }
+      } else {
+        let msg =
+          "Analysis failed. Please verify loading and boundary conditions.";
+
+        if (Array.isArray(response.errors) && response.errors.length > 0) {
+          const errorMsgs = response.errors.map((e) => {
+            if (typeof e === "string") return e;
+
+            // Safely construct a detailed error message
+            const command = e.command || "unknown";
+            const args = Array.isArray(e.args)
+              ? e.args.join(", ")
+              : e.args || "none";
+            const errorText = e.error || "";
+
+            return `Model build failed due to "${command}" command with args [${args}]`;
+          });
+
+          msg = errorMsgs.join("; ");
+        } else if (
+          typeof response.message === "string" &&
+          response.message.trim() !== ""
+        ) {
+          msg = response.message;
+        }
+
+        setError(msg);
+
+        setResultData({
+          status: false,
+          errors: response.errors || [msg],
+          warnings: response.warnings || [],
+          monitoring: null,
+          recorders: null,
+          model: null,
+          output_dir: response.output_dir || null,
         });
 
-        msg = errorMsgs.join("; ");
-      } else if (typeof response.message === "string" && response.message.trim() !== "") {
-        msg = response.message;
+        // Optional: you can still clean up even if it failed
+        if (response.output_dir) {
+          cleanupOutput(response.output_dir).catch((err) => {
+            console.warn("Cleanup failed :", err);
+          });
+        }
       }
-
+    } catch (err) {
+      console.error("Unexpected error:", err);
+      const msg = err.message || "An unexpected error occurred.";
       setError(msg);
-
       setResultData({
         status: false,
-        errors: response.errors || [msg],
-        warnings: response.warnings || [],
+        errors: [msg],
+        warnings: [],
         monitoring: null,
         recorders: null,
         model: null,
-        output_dir: response.output_dir || null,
+        output_dir: null,
       });
-
-      // Optional: you can still clean up even if it failed
-      if (response.output_dir) {
-        cleanupOutput(response.output_dir).catch((err) => {
-          console.warn("Cleanup failed :", err);
-        });
-      }
+    } finally {
+      setIsLoading(false);
     }
-  } catch (err) {
-    console.error("Unexpected error:", err);
-    const msg = err.message || "An unexpected error occurred.";
-    setError(msg);
-    setResultData({
-      status: false,
-      errors: [msg],
-      warnings: [],
-      monitoring: null,
-      recorders: null,
-      model: null,
-      output_dir: null,
-    });
-  } finally {
-    setIsLoading(false);
-  }
-};
+  };
 
   const handleClearImport = () => {
     setImportedJson(null);
     setImportError(null);
-    setImportFileName('');
+    setImportFileName("");
     setInputKey((prev) => prev + 1);
   };
 
@@ -160,7 +173,7 @@ const handleRunAnalysis = async () => {
             id="json-upload"
             key={inputKey}
             type="file"
-            accept=".json,application/json"
+            accept=".framex"
             onChange={handleFileChange}
             className="hidden-input"
           />
@@ -174,14 +187,24 @@ const handleRunAnalysis = async () => {
           onClick={() => {
             const modelJson = useModelStore.getState().toJson();
             const analysisJson = useAnalysisStore.getState().toJson();
-            const fullPayload = { ...modelJson, ...analysisJson };
-            const blob = new Blob(
-              [JSON.stringify(fullPayload, null, 2)],
-              { type: 'application/json' }
-            );
-            const link = document.createElement('a');
+
+            const fullPayload = {
+              meta: {
+                format: "framex",
+                version: "2.0.0",
+                created_by: "FrameX",
+                timestamp: new Date().toISOString(),
+              },
+              ...modelJson,
+              ...analysisJson,
+            };
+
+            const blob = new Blob([JSON.stringify(fullPayload, null, 2)], {
+              type: "application/json",
+            });
+            const link = document.createElement("a");
             link.href = URL.createObjectURL(blob);
-            link.download = 'model_config.json';
+            link.download = "FrameX_Model.framex";
             link.click();
           }}
         >
@@ -191,7 +214,7 @@ const handleRunAnalysis = async () => {
         <button
           onClick={handleRunAnalysis}
           disabled={isLoading}
-          className={`analysis-button ${isLoading ? 'loading' : ''}`}
+          className={`analysis-button ${isLoading ? "loading" : ""}`}
         >
           {isLoading ? (
             <span className="button-content">
@@ -199,7 +222,7 @@ const handleRunAnalysis = async () => {
               Running Analysis...
             </span>
           ) : (
-            '🚀 Run Analysis'
+            "🚀 Run Analysis"
           )}
         </button>
       </div>
@@ -219,8 +242,8 @@ const handleRunAnalysis = async () => {
       )}
 
       {importError && (
-        <div className="import-error text-red-600 text-sm mt-1">
-          {importError}
+        <div className="error-message mt-4">
+         <strong>Invalid FRAMEX file:</strong> {importError}
         </div>
       )}
 

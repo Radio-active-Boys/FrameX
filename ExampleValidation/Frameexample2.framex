@@ -1,7 +1,13 @@
 {
+  "meta": {
+    "format": "framex",
+    "version": "2.0.0",
+    "created_by": "FrameX",
+    "timestamp": "2025-07-22T08:56:07.591Z"
+  },
   "model_config": {
     "ndm": 2,
-    "ndf": 2
+    "ndf": 3
   },
   "nodes": [
     {
@@ -9,15 +15,15 @@
       "args": [
         1,
         0,
-        0
+        7
       ]
     },
     {
       "command": "node",
       "args": [
         2,
-        3,
-        0
+        6,
+        3
       ]
     },
     {
@@ -25,47 +31,23 @@
       "args": [
         3,
         6,
-        0
+        7
       ]
     },
     {
       "command": "node",
       "args": [
         4,
-        9,
-        0
+        14,
+        7
       ]
     },
     {
       "command": "node",
       "args": [
         5,
-        12,
+        14,
         0
-      ]
-    },
-    {
-      "command": "node",
-      "args": [
-        6,
-        3,
-        3
-      ]
-    },
-    {
-      "command": "node",
-      "args": [
-        7,
-        6,
-        4.5
-      ]
-    },
-    {
-      "command": "node",
-      "args": [
-        8,
-        9,
-        3
       ]
     }
   ],
@@ -73,266 +55,133 @@
     {
       "command": "fix",
       "args": [
+        2,
+        0,
         1,
-        1,
-        1
+        0
       ]
     },
     {
       "command": "fix",
       "args": [
         5,
-        0,
+        1,
+        1,
+        0
+      ]
+    }
+  ],
+  "materials": [],
+  "sections": [
+    {
+      "command": "section",
+      "name": "Elastic2D",
+      "args": [
+        "Elastic",
+        1,
+        200000000000,
+        0.01,
+        0.00000833
+      ],
+      "fibers": []
+    }
+  ],
+  "transformations": [
+    {
+      "command": "geomTransf",
+      "name": "Linear",
+      "args": [
+        "Linear",
         1
       ]
     }
   ],
-  "materials": [
+  "integrations": [
     {
-      "command": "uniaxialMaterial",
-      "name": "Elastic",
+      "command": "beamIntegration",
+      "name": "Lobatto",
       "args": [
-        "Elastic",
+        "Lobatto",
         1,
-        200000000000
+        1,
+        2
       ]
     }
   ],
-  "sections": [],
-  "transformations": [],
-  "integrations": [],
   "elements": [
     {
       "command": "element",
-      "name": "Truss",
+      "name": "elasticBeamColumn",
       "args": [
-        "Truss",
+        "elasticBeamColumn",
         1,
         1,
-        2,
+        3,
         0.001,
+        200000000000,
+        0.000001,
         1,
-        "-rho",
+        "-mass",
         0,
         "-cMass",
-        0,
-        "-doRayleigh",
+        "-release",
         0
       ]
     },
     {
       "command": "element",
-      "name": "Truss",
+      "name": "elasticBeamColumn",
       "args": [
-        "Truss",
+        "elasticBeamColumn",
         2,
-        2,
-        3,
-        0.001,
-        1,
-        "-rho",
-        0,
-        "-cMass",
-        0,
-        "-doRayleigh",
-        0
-      ]
-    },
-    {
-      "command": "element",
-      "name": "Truss",
-      "args": [
-        "Truss",
-        3,
         3,
         4,
         0.001,
+        200000000000,
+        0.000001,
         1,
-        "-rho",
+        "-mass",
         0,
         "-cMass",
-        0,
-        "-doRayleigh",
+        "-release",
         0
       ]
     },
     {
       "command": "element",
-      "name": "Truss",
+      "name": "elasticBeamColumn",
       "args": [
-        "Truss",
-        4,
+        "elasticBeamColumn",
+        3,
+        2,
+        3,
+        0.001,
+        200000000000,
+        0.000001,
+        1,
+        "-mass",
+        0,
+        "-cMass",
+        "-release",
+        0
+      ]
+    },
+    {
+      "command": "element",
+      "name": "elasticBeamColumn",
+      "args": [
+        "elasticBeamColumn",
         4,
         5,
-        0.001,
-        1,
-        "-rho",
-        0,
-        "-cMass",
-        0,
-        "-doRayleigh",
-        0
-      ]
-    },
-    {
-      "command": "element",
-      "name": "Truss",
-      "args": [
-        "Truss",
-        5,
-        1,
-        6,
-        0.001,
-        1,
-        "-rho",
-        0,
-        "-cMass",
-        0,
-        "-doRayleigh",
-        0
-      ]
-    },
-    {
-      "command": "element",
-      "name": "Truss",
-      "args": [
-        "Truss",
-        6,
-        6,
-        7,
-        0.001,
-        1,
-        "-rho",
-        0,
-        "-cMass",
-        0,
-        "-doRayleigh",
-        0
-      ]
-    },
-    {
-      "command": "element",
-      "name": "Truss",
-      "args": [
-        "Truss",
-        7,
-        2,
-        6,
-        0.001,
-        1,
-        "-rho",
-        0,
-        "-cMass",
-        0,
-        "-doRayleigh",
-        0
-      ]
-    },
-    {
-      "command": "element",
-      "name": "Truss",
-      "args": [
-        "Truss",
-        8,
-        2,
-        7,
-        0.001,
-        1,
-        "-rho",
-        0,
-        "-cMass",
-        0,
-        "-doRayleigh",
-        0
-      ]
-    },
-    {
-      "command": "element",
-      "name": "Truss",
-      "args": [
-        "Truss",
-        9,
-        3,
-        7,
-        0.001,
-        1,
-        "-rho",
-        0,
-        "-cMass",
-        0,
-        "-doRayleigh",
-        0
-      ]
-    },
-    {
-      "command": "element",
-      "name": "Truss",
-      "args": [
-        "Truss",
-        10,
         4,
-        7,
         0.001,
+        200000000000,
+        0.000001,
         1,
-        "-rho",
+        "-mass",
         0,
         "-cMass",
-        0,
-        "-doRayleigh",
-        0
-      ]
-    },
-    {
-      "command": "element",
-      "name": "Truss",
-      "args": [
-        "Truss",
-        11,
-        5,
-        8,
-        0.001,
-        1,
-        "-rho",
-        0,
-        "-cMass",
-        0,
-        "-doRayleigh",
-        0
-      ]
-    },
-    {
-      "command": "element",
-      "name": "Truss",
-      "args": [
-        "Truss",
-        12,
-        8,
-        7,
-        0.001,
-        1,
-        "-rho",
-        0,
-        "-cMass",
-        0,
-        "-doRayleigh",
-        0
-      ]
-    },
-    {
-      "command": "element",
-      "name": "Truss",
-      "args": [
-        "Truss",
-        13,
-        4,
-        8,
-        0.001,
-        1,
-        "-rho",
-        0,
-        "-cMass",
-        0,
-        "-doRayleigh",
+        "-release",
         0
       ]
     }
@@ -352,9 +201,10 @@
         {
           "command": "load",
           "args": [
-            2,
+            1,
             0,
-            -6
+            -9,
+            0
           ]
         },
         {
@@ -362,7 +212,8 @@
           "args": [
             3,
             0,
-            -8
+            -10,
+            0
           ]
         },
         {
@@ -370,7 +221,19 @@
           "args": [
             4,
             0,
-            -2
+            -15,
+            0
+          ]
+        },
+        {
+          "command": "eleLoad",
+          "args": [
+            "-ele",
+            4,
+            "-type",
+            "beamUniform",
+            0.4,
+            0
           ]
         }
       ]
@@ -448,12 +311,10 @@
         3,
         4,
         5,
-        6,
-        7,
-        8,
         "-dof",
         1,
         2,
+        3,
         "disp"
       ]
     },
@@ -471,12 +332,10 @@
         3,
         4,
         5,
-        6,
-        7,
-        8,
         "-dof",
         1,
         2,
+        3,
         "reaction"
       ]
     },
@@ -494,12 +353,10 @@
         3,
         4,
         5,
-        6,
-        7,
-        8,
         "-dof",
         1,
         2,
+        3,
         "vel"
       ]
     },
@@ -517,12 +374,10 @@
         3,
         4,
         5,
-        6,
-        7,
-        8,
         "-dof",
         1,
         2,
+        3,
         "accel"
       ]
     },
@@ -539,15 +394,6 @@
         2,
         3,
         4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13,
         "force"
       ]
     },
@@ -564,15 +410,6 @@
         2,
         3,
         4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13,
         "localForce"
       ]
     },
@@ -589,15 +426,6 @@
         2,
         3,
         4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13,
         "deformation"
       ]
     },
@@ -614,15 +442,6 @@
         2,
         3,
         4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13,
         "axialForce"
       ]
     },
@@ -639,15 +458,6 @@
         2,
         3,
         4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13,
         "basicDeformation"
       ]
     },
@@ -664,15 +474,6 @@
         2,
         3,
         4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13,
         "basicForce"
       ]
     },
@@ -689,15 +490,6 @@
         2,
         3,
         4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13,
         "stiffness"
       ]
     }
