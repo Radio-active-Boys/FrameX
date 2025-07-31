@@ -58,8 +58,8 @@ const handleAdd = () => {
   addComponent('nodeLite', nodeTpl.name, {
     ...nodeTpl.defaultParams,
     'Node ID':          newNodeId,
-    'X Coordinate (m)': x,
-    'Y Coordinate (m)': y
+    'X Coordinate': x,
+    'Y Coordinate': y
   });
 
   // 3) new zeroLength element (lite)
