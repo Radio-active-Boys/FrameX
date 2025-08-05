@@ -129,7 +129,7 @@ Open `http://localhost:5173` in your browser. Ensure the backend is running to e
 4. **View Diagrams**: Toggle between moment, shear, and axial force diagrams.
 5. **Hinges**: Apply rotational hinges by toggling the hinge icon on eligible nodes/elements.
 
-> Screenshots and example JSON models are available in the `docs/images` folder.
+> Screenshots and example Framex models are available in the `docs/images` folder.
 
 ---
 
